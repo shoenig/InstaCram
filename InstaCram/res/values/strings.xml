@@ -7,5 +7,6 @@
     <string name="new_deck">New Deck</string>
     <string name="view_deck">View Deck</string>
     <string name="edit_deck">Edit Deck</string>
+    <string name="title_activity_view_deck">ViewDeckActivity</string>
 
 </resources>
