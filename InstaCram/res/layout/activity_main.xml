@@ -1,14 +1,43 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+android:layout_width="fill_parent"
+android:layout_height="fill_parent"
+android:orientation="vertical" >
 
-    <TextView
+  	<LinearLayout
+    	android:layout_width="fill_parent"
+    	android:layout_height="wrap_content" >
+	    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
         android:text="@string/hello_world"
         tools:context=".MainActivity" />
-
-</RelativeLayout>
+    </LinearLayout>
+    
+    <LinearLayout
+    	android:layout_width="fill_parent"
+    	android:layout_height="wrap_content" >
+	    <Button android:id="@+id/new_deck"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="@string/new_deck" />
+	</LinearLayout>
+    
+  	<LinearLayout
+    	android:layout_width="fill_parent"
+    	android:layout_height="wrap_content" >    
+	    <Button android:id="@+id/view_deck"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="@string/view_deck" />  
+    </LinearLayout>
+    
+  	<LinearLayout
+    	android:layout_width="fill_parent"
+    	android:layout_height="wrap_content" >    
+	    <Button android:id="@+id/edit_deck"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="@string/edit_deck" />
+	</LinearLayout>
+</LinearLayout>

@@ -4,5 +4,8 @@
     <string name="hello_world">It is InstaCram!</string>
     <string name="menu_settings">Settings</string>
     <string name="title_activity_main">InstaCram</string>
+    <string name="new_deck">New Deck</string>
+    <string name="view_deck">View Deck</string>
+    <string name="edit_deck">Edit Deck</string>
 
 </resources>
