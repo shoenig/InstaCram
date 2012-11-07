@@ -2,6 +2,7 @@ package com.happykrappy.instacram;
 
 public class Deck {
 	private String name;
+	private int id;
 	
 	Deck(String name) {
 		this.name = name;
@@ -13,5 +14,13 @@ public class Deck {
 	
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public int getId(){
+		return id;
 	}
 }

@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.text.Editable;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +15,8 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
+	static final String TAG = "InstaCram Tag";
+	
 	private Button newDeckButton;
 	private Button viewDeckButton;
 	private Button editDeckButton;
@@ -22,6 +25,9 @@ public class MainActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        
+        final DatabaseHandler db = new DatabaseHandler(this);
+        
         newDeckButton = (Button) findViewById(R.id.new_deck);
         newDeckButton.setOnClickListener(new View.OnClickListener() {
         	public void onClick(View v) {
@@ -36,18 +42,20 @@ public class MainActivity extends Activity {
         		alert.setView(input);
 
         		alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-        		public void onClick(DialogInterface dialog, int whichButton) {
-        		  Editable value = input.getText();
-        		  Deck newDeck = new Deck(value.toString());
-        		  
-        		  //add newDeck to our databases of decks
-        		  
-        		  //redirect user to deck page with First Card Button
-        		  //ViewDeckActivity
-        		  Intent i = new Intent(MainActivity.this, ViewDeckActivity.class);
-        		  i.putExtra("DeckName", value.toString());
-        		  startActivity(i); 
-        		  }
+	        		public void onClick(DialogInterface dialog, int whichButton) {
+	        		  Editable value = input.getText();
+	        		  
+	        		  	//add newDeck to our databases of decks
+	        	        Log.d(TAG, "Inserting ..");
+	        	        db.addDeck(new Deck(value.toString()));
+	        	        int newDeckId = db.selectDeck(value.toString());
+	        		  //redirect user to deck page with First Card Button
+	        		  //ViewDeckActivity
+	        		  Intent i = new Intent(MainActivity.this, EditDeckActivity.class);
+	        		  Log.d(TAG, value.toString());
+	        		  i.putExtra("DeckId", ""+newDeckId);
+	        		  startActivity(i); 
+	        		}
         		});
 
         		alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

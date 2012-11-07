@@ -21,8 +21,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ViewDeckActivity"
-            android:label="@string/title_activity_view_deck" >
+            android:name=".EditDeckActivity"
+            android:label="@string/title_activity_edit_deck" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
