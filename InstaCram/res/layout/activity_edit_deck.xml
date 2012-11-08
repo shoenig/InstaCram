@@ -7,21 +7,46 @@
    	<LinearLayout
    	   	android:layout_width="fill_parent"
     	android:layout_height="wrap_content" >
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/deck_name"
-        android:text=""
-        tools:context=".EditDeckActivity" />
+	    <TextView 
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/currently_editing" />
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:id="@+id/deck_name"
+	        android:text=""
+	        tools:context=".EditDeckActivity" />
     </LinearLayout>
+    
+   <LinearLayout
+  	    android:layout_width="fill_parent"
+  	    android:layout_height="wrap_content" >
+  	    <ImageButton
+  	        android:layout_width="wrap_content"
+  	        android:layout_height="wrap_content"
+  	        android:contentDescription="@string/thumb_front_desc"
+  	        android:src="@drawable/shoot_front" 
+  	        android:id="@+id/thumbnail_front" />
+		<ImageButton
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:contentDescription="@string/thumb_back_desc"
+		    android:src="@drawable/shoot_back"
+		    android:id="@+id/thumbnail_back" />
+	</LinearLayout>
     
   	<LinearLayout
     	android:layout_width="fill_parent"
     	android:layout_height="wrap_content" >    
-	    <Button android:id="@+id/add_card"
+	    <Button android:id="@+id/save_card"
 	    	android:layout_width="wrap_content"
 	    	android:layout_height="wrap_content"
-	    	android:text="@string/add_card" />  
+	    	android:text="@string/save_card" />
+	    <Button android:id="@+id/finished"
+	        android:layout_width="wrap_content"
+	    	android:layout_height="wrap_content"
+	    	android:text="@string/finish" />  
     </LinearLayout>
-
+    
 </LinearLayout>

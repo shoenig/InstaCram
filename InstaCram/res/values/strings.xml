@@ -7,7 +7,10 @@
     <string name="new_deck">New Deck</string>
     <string name="view_deck">View Deck</string>
     <string name="edit_deck">Edit Deck</string>
-    <string name="title_activity_edit_deck">EditDeckActivity</string>
-    <string name="add_card">Add Card</string>
-
+    <string name="title_activity_edit_deck">InstaCram</string>
+    <string name="save_card">Save Card</string>
+	<string name="thumb_front_desc">Front</string>
+	<string name="thumb_back_desc">Back</string>
+	<string name="currently_editing">Currently Editing Deck: </string>
+	<string name="finish">Finish</string>
 </resources>
