@@ -51,7 +51,16 @@ public class EditDeckActivity extends Activity {
             	deckId = Integer.parseInt(getIntent().getExtras().getString("DeckId"));
             }
         } else {
-        	deckId= Integer.parseInt((String) savedInstanceState.getSerializable("DeckId"));
+        	try {
+        		deckId = Integer.parseInt((String) savedInstanceState.getSerializable("DeckId"));
+        	} catch(Exception exe) {
+        		// this sometimes happens when user clicks back while taking a picture
+        		Log.w(TAG, "Exception thrown trying to get DeckId, giving up and launching main instead");
+        		Intent i = new Intent(this, MainActivity.class);
+        		startActivity(i);
+        		return;
+        	}
+        	deckId = -1; // make compiler happy, can never get here
         }
         
         Log.d(MainActivity.TAG, "viewDeck-DeckId: " + deckId);
@@ -82,6 +91,8 @@ public class EditDeckActivity extends Activity {
         mFinishedButton.setOnClickListener(new OnClickListener() {
         	public void onClick(View v) {
         		Log.i(TAG, "Finished Button Clicked, gonna stop editing and go to homescreen");
+        		Intent intent = new Intent(EditDeckActivity.this, MainActivity.class);
+        		startActivity(intent);
         	}
         });
         

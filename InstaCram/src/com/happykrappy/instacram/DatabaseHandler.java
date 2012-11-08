@@ -47,6 +47,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	    db.insert(TABLE_DECKS, null, values);
 	    db.close();
 	}
+	
+	public void addCard(Card c) {
+		
+	}
 
 	public int selectDeck(String deckName) {
 		SQLiteDatabase db = this.getWritableDatabase();
