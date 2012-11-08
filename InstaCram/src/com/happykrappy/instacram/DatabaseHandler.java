@@ -15,10 +15,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
  
     // Database Name
     private static final String DATABASE_NAME = "decksManager";
-    
+
+
+    // decks
 	static final String TABLE_DECKS = "decks";
 	static final String KEY_ID = "id";
 	static final String KEY_NAME = "name";
+	
+	// cards
+    static final String TABLE_CARDS = "cards";
+    // columns
     
 	public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -49,7 +55,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	}
 	
 	public void addCard(Card c) {
+		SQLiteDatabase db = this.getWritableDatabase();
+		ContentValues values = new ContentValues();
+		values.put(key, value); // wtf are the columns of a card?
 		
+		db.insert(TABLE_CARDS, null, values);
+		db.close();
 	}
 
 	public int selectDeck(String deckName) {
