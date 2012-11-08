@@ -28,7 +28,7 @@ public class EditDeckActivity extends Activity {
         }
         
         Log.d(MainActivity.TAG, "viewDeck-DeckId: " + DeckId);
-        name_tv.setText(DeckId);
+        name_tv.setText("" + DeckId);
     }
 
     @Override
