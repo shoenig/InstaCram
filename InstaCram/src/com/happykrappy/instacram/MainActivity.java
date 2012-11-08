@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v4.app.DialogFragment;
 import android.text.Editable;
 import android.util.Log;
 import android.view.Menu;
@@ -20,6 +21,8 @@ public class MainActivity extends Activity {
 	private Button newDeckButton;
 	private Button viewDeckButton;
 	private Button editDeckButton;
+	
+	DialogFragment df;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
