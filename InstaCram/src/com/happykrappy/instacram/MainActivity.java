@@ -3,9 +3,11 @@ package com.happykrappy.instacram;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentActivity;
 import android.text.Editable;
 import android.util.Log;
 import android.view.Menu;
@@ -14,8 +16,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class MainActivity extends Activity {
+public class MainActivity extends FragmentActivity {
 
+	final Context context = this;
 	static final String TAG = "InstaCram Tag";
 	
 	private Button newDeckButton;
@@ -46,18 +49,18 @@ public class MainActivity extends Activity {
 
         		alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 	        		public void onClick(DialogInterface dialog, int whichButton) {
-	        		  Editable value = input.getText();
-	        		  
-	        		  	//add newDeck to our databases of decks
-	        	        Log.d(TAG, "Inserting ..");
-	        	        db.addDeck(new Deck(value.toString()));
-	        	        int newDeckId = db.selectDeck(value.toString());
-	        		  //redirect user to deck page with First Card Button
-	        		  //ViewDeckActivity
-	        		  Intent i = new Intent(MainActivity.this, EditDeckActivity.class);
-	        		  Log.d(TAG, value.toString());
-	        		  i.putExtra("DeckId", ""+newDeckId);
-	        		  startActivity(i); 
+	        			Editable value = input.getText();
+  
+  						//add newDeck to our databases of decks
+						Log.d(TAG, "Inserting ..");
+						db.addDeck(new Deck(value.toString()));
+						int newDeckId = db.selectDeck(value.toString());
+						
+						//ViewDeckActivity
+						Intent i = new Intent(MainActivity.this, EditDeckActivity.class);
+						Log.d(TAG, value.toString());
+						i.putExtra("DeckId", ""+newDeckId);
+						startActivity(i); 
 	        		}
         		});
 
@@ -75,7 +78,10 @@ public class MainActivity extends Activity {
         editDeckButton = (Button) findViewById(R.id.edit_deck);
         editDeckButton.setOnClickListener(new View.OnClickListener() {
         	public void onClick(View v) {
-        		Toast.makeText(MainActivity.this, "Edit Deck Button Clicked", Toast.LENGTH_SHORT).show();
+        		DialogFragment newFragment = new DeckSelector();
+        	    newFragment.show(getSupportFragmentManager(), "Deck Selector Opened");
+    				
+        		//Toast.makeText(MainActivity.this, "Edit Deck Button Clicked", Toast.LENGTH_SHORT).show();
         	}
 		});
         viewDeckButton = (Button) findViewById(R.id.view_deck);

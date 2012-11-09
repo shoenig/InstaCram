@@ -21,6 +21,7 @@ import android.util.Log;
 public class EditDeckActivity extends Activity {
 	
 	private static final String TAG = "EditDeckActivity";
+	final Context context = this;
 	
 	private TextView mNameTextVew;
 	private Bitmap mFrontThumbnail;
@@ -31,6 +32,7 @@ public class EditDeckActivity extends Activity {
 	private Button mFinishedButton;
 	private static final int RETURN_FROM_FRONT_PHOTO = 11;
 	private static final int RETURN_FROM_BACK_PHOTO = 22;
+	private ImageButton mDeleteDeckButton;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,8 +44,9 @@ public class EditDeckActivity extends Activity {
         mBackThumbnailImageButton = (ImageButton) findViewById(R.id.thumbnail_back);
         mSaveCardButton = (Button) findViewById(R.id.save_card);
         mFinishedButton = (Button) findViewById(R.id.finished);
+        mDeleteDeckButton = (ImageButton) findViewById(R.id.delete_deck);
         
-        int deckId;
+        final int deckId;
         if (savedInstanceState == null) {
             if(getIntent().getExtras() == null) {
             	deckId= 0;
@@ -60,11 +63,21 @@ public class EditDeckActivity extends Activity {
         		startActivity(i);
         		return;
         	}
-        	deckId = -1; // make compiler happy, can never get here
+        	//deckId = -1; // make compiler happy, can never get here
         }
         
         Log.d(MainActivity.TAG, "viewDeck-DeckId: " + deckId);
         mNameTextVew.setText("" + deckId); // the key, how to get the name?
+        
+        mDeleteDeckButton.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				Log.i(TAG, "Delete Deck button clicked, gonna delete deck id: " + deckId);
+				final DatabaseHandler db = new DatabaseHandler(context);
+		        db.deleteDeck(deckId);
+        		Intent intent = new Intent(EditDeckActivity.this, MainActivity.class);
+        		startActivity(intent);
+			}
+        });
         
         mFrontThumbnailImageButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {

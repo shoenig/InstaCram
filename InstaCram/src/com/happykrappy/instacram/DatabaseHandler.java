@@ -1,11 +1,13 @@
 package com.happykrappy.instacram;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import java.lang.UnsupportedOperationException;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
 
@@ -57,7 +59,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	public void addCard(Card c) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = new ContentValues();
-		values.put(key, value); // wtf are the columns of a card?
+		//values.put(key, value); // wtf are the columns of a card?
 		
 		db.insert(TABLE_CARDS, null, values);
 		db.close();
@@ -74,5 +76,75 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             cursor.moveToFirst();
                 
 		return Integer.parseInt(cursor.getString(0));
+	}
+	
+	 public List<Deck> getAllDecks() {
+		    List<Deck> deckList = new ArrayList<Deck>();
+		    String selectQuery = "SELECT  * FROM " + TABLE_DECKS + " ORDER BY " + KEY_ID + " ASC";
+		 
+		    SQLiteDatabase db = this.getWritableDatabase();
+		    Cursor cursor = db.rawQuery(selectQuery, null);
+		 
+		    if (cursor.moveToFirst()) {
+		        do {
+		            Deck deck = new Deck();
+		            deck.setId(Integer.parseInt(cursor.getString(0)));
+		            deck.setName(cursor.getString(1));
+		            
+		            // Adding contact to list
+		            deckList.add(deck);
+		        } while (cursor.moveToNext());
+		    }
+		 
+		    return deckList;
+		}
+
+	public int countDecks() {
+	    String countQuery = "SELECT COUNT(*) FROM " + TABLE_DECKS;
+		 
+	    SQLiteDatabase db = this.getWritableDatabase();
+	    Cursor cursor = db.rawQuery(countQuery, null);
+		
+        if (cursor != null)
+            cursor.moveToFirst();
+                
+		return Integer.parseInt(cursor.getString(0));
+	}
+
+	public void deleteDeck(int deckId) {
+	    SQLiteDatabase db = this.getWritableDatabase();
+	    db.delete(TABLE_DECKS, KEY_ID + " = ?",
+	            new String[] { String.valueOf(deckId) });
+	    db.close();
+	}
+	
+	public void removeDeck(int deckId) {
+		String deleteQuery = "DELETE FROM " + TABLE_DECKS + " WHERE " + KEY_ID + " = " + deckId;
+	    SQLiteDatabase db = this.getWritableDatabase();
+	    Cursor cursor = db.rawQuery(deleteQuery, null);
+		
+        if (cursor != null)
+            cursor.moveToFirst();
+	}
+
+	public Deck getNthDeck(int which) {
+	    Deck deck = new Deck();
+	    String selectQuery = "SELECT  * FROM " + TABLE_DECKS + " ORDER BY " + KEY_ID + " ASC";
+	 
+	    SQLiteDatabase db = this.getWritableDatabase();
+	    Cursor cursor = db.rawQuery(selectQuery, null);
+	    int cur = 0;
+	    
+	    if (cursor.moveToFirst()) {
+	        do {
+	        	if (cur == which) {
+		            deck.setId(Integer.parseInt(cursor.getString(0)));
+		            deck.setName(cursor.getString(1));        	
+	        	}
+	        	++cur;
+	        } while (cursor.moveToNext());
+	    }
+	 
+	    return deck;
 	}
 }

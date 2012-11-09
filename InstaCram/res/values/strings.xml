@@ -13,4 +13,7 @@
 	<string name="thumb_back_desc">Back</string>
 	<string name="currently_editing">Currently Editing Deck: </string>
 	<string name="finish">Finish</string>
+	<string name="cancel">Cancel</string>
+	<string name="select_deck">Select Deck</string>
+	<string name="delete_deck">Delete Deck</string>
 </resources>

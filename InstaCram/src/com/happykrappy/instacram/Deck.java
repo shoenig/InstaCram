@@ -4,6 +4,10 @@ public class Deck {
 	private String name;
 	private int id;
 	
+	Deck() {
+		
+	}
+	
 	Deck(String name) {
 		this.name = name;
 	}
