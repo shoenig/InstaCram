@@ -83,6 +83,7 @@ public class EditDeckActivity extends Activity {
 			public void onClick(View v) {
 				Log.i(TAG, "Front Thumbnail Button Clicked, gonna take a picture");
 				dispatchTakePictureIntent(RETURN_FROM_FRONT_PHOTO);
+				
 				Log.i(TAG, "returned from taking photo for front");
 			}
         });

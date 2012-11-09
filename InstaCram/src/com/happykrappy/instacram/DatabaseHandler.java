@@ -26,6 +26,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	
 	// cards
     static final String TABLE_CARDS = "cards";
+    static final String KEY_FRONT = "front";
+    static final String KEY_BACK = "back";
+    static final String KEY_DECK_ID = "deck_id";
+    
     // columns
     
 	public DatabaseHandler(Context context) {
@@ -38,6 +42,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         String CREATE_DECKS_TABLE = "CREATE TABLE " + TABLE_DECKS + "("
                 + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT" + ")";
         db.execSQL(CREATE_DECKS_TABLE);
+        
+        String CREATE_CARDS_TABLE = "CREATE TABLE " + TABLE_CARDS + "("
+                + KEY_DECK_ID + " INTEGER PRIMARY KEY," + KEY_FRONT + " BLOB, " +
+                KEY_BACK + " BLOB" +")";
+        db.execSQL(CREATE_CARDS_TABLE);
     }
 
 	@Override
