@@ -1,5 +1,6 @@
 package com.happykrappy.instacram;
 
+import java.io.ByteArrayOutputStream;
 import java.util.List;
 
 import android.os.Bundle;
@@ -99,6 +100,24 @@ public class EditDeckActivity extends Activity {
         mSaveCardButton.setOnClickListener(new OnClickListener() {
         	public void onClick(View v) {
         		Log.i(TAG, "Save Card Button Clicked, gonna store it and move to next card");
+        		
+        		//Create Card
+        		Card card = new Card(deckId);
+        		ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        		mFrontThumbnail.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        		byte[] byteArrayFront = stream.toByteArray();
+        		card.setFront(byteArrayFront);
+        		stream = new ByteArrayOutputStream();
+        		mBackThumbnail.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        		byte[] byteArrayBack = stream.toByteArray();
+        		card.setBack(byteArrayBack);
+        		
+        		//Add card to db
+        		final DatabaseHandler db = new DatabaseHandler(context);
+        		db.addCard(card);
+        		
+        		mFrontThumbnailImageButton.setImageResource(R.drawable.shoot_front);
+        		mBackThumbnailImageButton.setImageResource(R.drawable.shoot_back);
         	}
         });
         

@@ -9,6 +9,10 @@ public class Card {
 		this.deckId = deckId;
 	}
 	
+	void setDeckId(int deckId) {
+		this.deckId = deckId;
+	}
+	
 	int getDeckId() {
 		return deckId;
 	}

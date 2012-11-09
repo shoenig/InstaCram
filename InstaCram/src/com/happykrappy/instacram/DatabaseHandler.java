@@ -8,6 +8,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
 
@@ -26,8 +27,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	
 	// cards
     static final String TABLE_CARDS = "cards";
-    static final String KEY_FRONT = "front";
-    static final String KEY_BACK = "back";
+    static final String BLOB_FRONT = "front";
+    static final String BLOB_BACK = "back";
     static final String KEY_DECK_ID = "deck_id";
     
     // columns
@@ -44,8 +45,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.execSQL(CREATE_DECKS_TABLE);
         
         String CREATE_CARDS_TABLE = "CREATE TABLE " + TABLE_CARDS + "("
-                + KEY_DECK_ID + " INTEGER PRIMARY KEY," + KEY_FRONT + " BLOB, " +
-                KEY_BACK + " BLOB" +")";
+                + KEY_DECK_ID + " INTEGER," + BLOB_FRONT + " BLOB, " +
+                BLOB_BACK + " BLOB" +")";
         db.execSQL(CREATE_CARDS_TABLE);
     }
 
@@ -68,7 +69,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	public void addCard(Card c) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = new ContentValues();
-		//values.put(key, value); // wtf are the columns of a card?
+		values.put(KEY_DECK_ID, c.getDeckId()); // wtf are the columns of a card?
+		values.put(BLOB_FRONT, c.getFront());
+		values.put(BLOB_BACK, c.getBack());
 		
 		db.insert(TABLE_CARDS, null, values);
 		db.close();
@@ -167,5 +170,29 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	    db.close();
 	    
 	    return deck;
+	}
+
+	public List<Card> getCards(int deckId) {
+	    List<Card> cardList = new ArrayList<Card>();
+	    String selectQuery = "SELECT  * FROM " + TABLE_CARDS + " WHERE " + KEY_DECK_ID + "= " + deckId;
+	 
+	    SQLiteDatabase db = this.getWritableDatabase();
+	    Cursor cursor = db.rawQuery(selectQuery, null);
+	 
+	    if (cursor.moveToFirst()) {
+	        do {
+	            Card card = new Card(deckId);
+	            card.setFront(cursor.getBlob(1));
+	            card.setBack(cursor.getBlob(2));
+	            
+	            // Adding contact to list
+	            cardList.add(card);
+	            Log.i(MainActivity.TAG, "Adding card for deckId: " + deckId);
+	        } while (cursor.moveToNext());
+	    }
+	 
+	    db.close();
+	    
+	    return cardList;
 	}
 }

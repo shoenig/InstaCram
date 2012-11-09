@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -19,6 +22,8 @@ import android.widget.ImageView.ScaleType;
 
 public class DeckGalleryActivity extends Activity {
 
+	final Context context = this;
+	
     private ImageView selectedImageView;
     private ImageView leftArrowImageView;
     private ImageView rightArrowImageView;
@@ -28,12 +33,32 @@ public class DeckGalleryActivity extends Activity {
     private List<Drawable> backDrawables;
     private DeckGalleryAdapter galImageAdapter;
     public boolean onBackOfCard = false;
+    private int deckId;
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_deck_gallery);
 
+        if (savedInstanceState == null) {
+            if(getIntent().getExtras() == null) {
+            	deckId= 0;
+            } else {
+            	deckId = Integer.parseInt(getIntent().getExtras().getString("DeckId"));
+            }
+        } else {
+        	try {
+        		deckId = Integer.parseInt((String) savedInstanceState.getSerializable("DeckId"));
+        	} catch(Exception exe) {
+        		// this sometimes happens when user clicks back while taking a picture
+        		Log.w(MainActivity.TAG, "Exception thrown trying to get DeckId, giving up and launching main instead");
+        		Intent i = new Intent(this, MainActivity.class);
+        		startActivity(i);
+        		return;
+        	}
+        	//deckId = -1; // make compiler happy, can never get here
+        }
+        
         getDrawablesList();
         setupUI();
     }
@@ -137,15 +162,28 @@ public class DeckGalleryActivity extends Activity {
     }
 
     private void getDrawablesList() {
-        drawables = new ArrayList<Drawable>();
-        drawables.add(getResources().getDrawable(R.drawable.delete));
-        drawables.add(getResources().getDrawable(R.drawable.shoot_back));
-        drawables.add(getResources().getDrawable(R.drawable.shoot_front));
-        
-        backDrawables = new ArrayList<Drawable>();
-        backDrawables.add(getResources().getDrawable(R.drawable.blue));
-        backDrawables.add(getResources().getDrawable(R.drawable.blue));
-        backDrawables.add(getResources().getDrawable(R.drawable.blue));
+    	drawables = new ArrayList<Drawable>();
+    	backDrawables = new ArrayList<Drawable>();
+    	final DatabaseHandler db = new DatabaseHandler(context);
+    	List<Card> cards = db.getCards(deckId);
+    	
+    	for (Card c : cards) {
+    		Bitmap front = BitmapFactory.decodeByteArray(c.getFront() , 0, c.getFront().length);
+    		Drawable frontDrawable = new BitmapDrawable(getResources(),front);
+    		drawables.add(frontDrawable);
+    		
+    		Bitmap back = BitmapFactory.decodeByteArray(c.getBack() , 0, c.getBack().length);
+    		Drawable backDrawable = new BitmapDrawable(getResources(),back);
+    		backDrawables.add(backDrawable);
+    	}
+    	
+//        drawables.add(getResources().getDrawable(R.drawable.delete));
+//        drawables.add(getResources().getDrawable(R.drawable.shoot_back));
+//        drawables.add(getResources().getDrawable(R.drawable.shoot_front));
+//        
+//        backDrawables.add(getResources().getDrawable(R.drawable.blue));
+//        backDrawables.add(getResources().getDrawable(R.drawable.blue));
+//        backDrawables.add(getResources().getDrawable(R.drawable.blue));
     }
 
     private void setSelectedImage(int selectedImagePosition) {
