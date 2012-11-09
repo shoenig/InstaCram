@@ -11,7 +11,13 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.util.Log;
 
-public class DeckSelector extends DialogFragment {	
+public class DeckSelector extends DialogFragment {
+	boolean editMode;
+	
+	DeckSelector(boolean editModeRequested) {
+		this.editMode = editModeRequested;
+	}
+	
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
@@ -39,8 +45,12 @@ public class DeckSelector extends DialogFragment {
         .setItems(deckNames, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
             // The 'which' argument contains the index position of the selected item
-			//ViewDeckActivity
-			Intent i = new Intent(getActivity(), EditDeckActivity.class);
+            Intent i;
+			if (editMode) {
+				i = new Intent(getActivity(), EditDeckActivity.class);
+			}
+			else
+				i = new Intent(getActivity(), DeckGalleryActivity.class);
 			
 			//Get deck from index selected
 			final DatabaseHandler db = new DatabaseHandler(getActivity());

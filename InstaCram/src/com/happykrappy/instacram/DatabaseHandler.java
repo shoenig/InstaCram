@@ -75,6 +75,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         if (cursor != null)
             cursor.moveToFirst();
                 
+        db.close();
+        
 		return Integer.parseInt(cursor.getString(0));
 	}
 	
@@ -96,6 +98,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		        } while (cursor.moveToNext());
 		    }
 		 
+		    db.close();
+		    
 		    return deckList;
 		}
 
@@ -107,8 +111,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		
         if (cursor != null)
             cursor.moveToFirst();
-                
-		return Integer.parseInt(cursor.getString(0));
+        
+        int num = Integer.parseInt(cursor.getString(0));
+        
+        db.close();
+        
+		return num;
 	}
 
 	public void deleteDeck(int deckId) {
@@ -125,6 +133,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		
         if (cursor != null)
             cursor.moveToFirst();
+        
+        db.close();
 	}
 
 	public Deck getNthDeck(int which) {
@@ -145,6 +155,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	        } while (cursor.moveToNext());
 	    }
 	 
+	    db.close();
+	    
 	    return deck;
 	}
 }

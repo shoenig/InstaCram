@@ -130,7 +130,7 @@ public class EditDeckActivity extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_view_deck, menu);
+        //getMenuInflater().inflate(R.menu.activity_view_deck, menu);
         return true;
     }
     

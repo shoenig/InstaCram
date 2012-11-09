@@ -73,21 +73,20 @@ public class MainActivity extends FragmentActivity {
         		alert.show();
         	}
         	
-        	
 		});
         editDeckButton = (Button) findViewById(R.id.edit_deck);
         editDeckButton.setOnClickListener(new View.OnClickListener() {
         	public void onClick(View v) {
-        		DialogFragment newFragment = new DeckSelector();
-        	    newFragment.show(getSupportFragmentManager(), "Deck Selector Opened");
-    				
-        		//Toast.makeText(MainActivity.this, "Edit Deck Button Clicked", Toast.LENGTH_SHORT).show();
+        		DialogFragment newFragment = new DeckSelector(true);
+        	    newFragment.show(getSupportFragmentManager(), "Deck Selector Opened In Edit Mode");
         	}
 		});
         viewDeckButton = (Button) findViewById(R.id.view_deck);
         viewDeckButton.setOnClickListener(new View.OnClickListener() {
         	public void onClick(View v) {
-        		Toast.makeText(MainActivity.this, "View Deck Button Clicked", Toast.LENGTH_SHORT).show();
+        		DialogFragment newFragment = new DeckSelector(false);
+        	    newFragment.show(getSupportFragmentManager(), "Deck Selector Opened in View Mode");
+        		//Toast.makeText(MainActivity.this, "View Deck Button Clicked", Toast.LENGTH_SHORT).show();
         	}
 		});        
     }
