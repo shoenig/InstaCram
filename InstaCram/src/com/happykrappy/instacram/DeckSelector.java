@@ -1,6 +1,5 @@
 package com.happykrappy.instacram;
 
-import java.util.HashMap;
 import java.util.List;
 
 import android.app.AlertDialog;

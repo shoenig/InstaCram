@@ -1,7 +1,6 @@
 package com.happykrappy.instacram;
 
 import android.os.Bundle;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -14,7 +13,6 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 public class MainActivity extends FragmentActivity {
 
@@ -86,7 +84,6 @@ public class MainActivity extends FragmentActivity {
         	public void onClick(View v) {
         		DialogFragment newFragment = new DeckSelector(false);
         	    newFragment.show(getSupportFragmentManager(), "Deck Selector Opened in View Mode");
-        		//Toast.makeText(MainActivity.this, "View Deck Button Clicked", Toast.LENGTH_SHORT).show();
         	}
 		});        
     }
