@@ -35,54 +35,36 @@ public class MainActivity extends FragmentActivity {
         newDeckButton = (Button) findViewById(R.id.new_deck);
         newDeckButton.setOnClickListener(new View.OnClickListener() {
         	public void onClick(View v) {
-        		AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
-
-        		alert.setTitle("New Deck");
-        		alert.setMessage("Input Deck Name");
-
-        		// Set an EditText view to get user input 
-        		final EditText input = new EditText(MainActivity.this);
-        		alert.setView(input);
-
-        		alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-	        		public void onClick(DialogInterface dialog, int whichButton) {
-	        			Editable value = input.getText();
-  
-  						//add newDeck to our databases of decks
-						Log.d(TAG, "Inserting ..");
-						db.addDeck(new Deck(value.toString()));
-						int newDeckId = db.selectDeck(value.toString());
-						
-						//ViewDeckActivity
-						Intent i = new Intent(MainActivity.this, EditDeckActivity.class);
-						Log.d(TAG, value.toString());
-						i.putExtra("DeckId", ""+newDeckId);
-						startActivity(i); 
-	        		}
-        		});
-
-        		alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-        		  public void onClick(DialogInterface dialog, int whichButton) {
-        		    // Canceled.
-        		  }
-        		});
-
-        		alert.show();
+        		showAddDeckAlert(new AlertDialog.Builder(MainActivity.this), db, false);
         	}
         	
 		});
         editDeckButton = (Button) findViewById(R.id.edit_deck);
         editDeckButton.setOnClickListener(new View.OnClickListener() {
         	public void onClick(View v) {
-        		DialogFragment newFragment = new DeckSelector(true);
-        	    newFragment.show(getSupportFragmentManager(), "Deck Selector Opened In Edit Mode");
+                final DatabaseHandler db = new DatabaseHandler(MainActivity.this);
+                int numDecks = db.countDecks();
+                if (numDecks == 0) {
+                	showAddDeckAlert(new AlertDialog.Builder(MainActivity.this), db, true);
+                }
+                else {
+                	DialogFragment newFragment = new DeckSelector(true);
+                	newFragment.show(getSupportFragmentManager(), "Deck Selector Opened In Edit Mode");
+                }
         	}
 		});
         viewDeckButton = (Button) findViewById(R.id.view_deck);
         viewDeckButton.setOnClickListener(new View.OnClickListener() {
         	public void onClick(View v) {
-        		DialogFragment newFragment = new DeckSelector(false);
-        	    newFragment.show(getSupportFragmentManager(), "Deck Selector Opened in View Mode");
+                final DatabaseHandler db = new DatabaseHandler(MainActivity.this);
+                int numDecks = db.countDecks();
+                if (numDecks == 0) {
+                	showAddDeckAlert(new AlertDialog.Builder(MainActivity.this), db, true);
+                }
+                else {
+            		DialogFragment newFragment = new DeckSelector(false);
+            	    newFragment.show(getSupportFragmentManager(), "Deck Selector Opened in View Mode");
+                }
         	}
 		});        
     }
@@ -91,5 +73,42 @@ public class MainActivity extends FragmentActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_main, menu);
         return true;
+    }
+    
+    void showAddDeckAlert(AlertDialog.Builder alert,final DatabaseHandler db, boolean startingFromScratch) {
+    	if (startingFromScratch)
+    		alert.setTitle(R.string.no_decks_available);
+    	else
+    		alert.setTitle(R.string.adding_new_deck);
+		alert.setMessage(R.string.input_new_deck_name);
+
+		// Set an EditText view to get user input 
+		final EditText input = new EditText(MainActivity.this);
+		alert.setView(input);
+
+		alert.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+    		public void onClick(DialogInterface dialog, int whichButton) {
+    			Editable value = input.getText();
+
+				//add newDeck to our databases of decks
+				Log.d(TAG, "Inserting ..");
+				db.addDeck(new Deck(value.toString()));
+				int newDeckId = db.selectDeck(value.toString());
+				
+				//ViewDeckActivity
+				Intent i = new Intent(MainActivity.this, EditDeckActivity.class);
+				Log.d(TAG, value.toString());
+				i.putExtra("DeckId", ""+newDeckId);
+				startActivity(i); 
+    		}
+		});
+
+		alert.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+		  public void onClick(DialogInterface dialog, int whichButton) {
+		    // Canceled.
+		  }
+		});
+
+		alert.show();
     }
 }

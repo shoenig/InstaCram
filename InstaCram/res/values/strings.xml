@@ -19,4 +19,8 @@
     <string name="title_activity_view_deck">ViewDeckActivity</string>
     <string name="title_activity_deck_gallery">DeckGalleryActivity</string>
 	<string name="space"> </string>
+	<string name="no_decks_available">No Decks Available</string>
+	<string name="input_new_deck_name">Input New Deck Name</string>
+	<string name="ok">OK</string>
+	<string name="adding_new_deck">Adding New Deck</string>
 </resources>
