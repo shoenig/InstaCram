@@ -1,23 +1,51 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="fill_parent"
-android:layout_height="fill_parent"
-android:orientation="vertical" >
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center"
+    android:background="@color/DarkViolet"
+    android:orientation="vertical" >
 
   	<LinearLayout
     	android:layout_width="fill_parent"
+    	android:gravity="center"
     	android:layout_height="wrap_content" >
-	    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_world"
+	    <TextView android:id="@+id/logo_textview"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textSize="32sp"
+	        android:typeface="monospace"
+	        android:textStyle="bold"
+	        android:textColor="@color/Orange"
+	        android:shadowColor="@color/MidnightBlue"
+	        android:shadowRadius="2.5"
+	        android:shadowDx="2"
+	        android:shadowDy="2"
+	        android:text="@string/hello_world"
         tools:context=".MainActivity" />
     </LinearLayout>
     
+  	<!--  really ghetto way of putting space in here -->
+  	<LinearLayout
+  	    android:layout_width="fill_parent"
+  	    android:gravity="center"
+  	    android:layout_height="wrap_content">
+  	    <TextView
+  	        	android:layout_width="wrap_content"
+  	        	android:layout_height="wrap_content"
+  	        	android:text="@string/space"
+  	        	android:textSize="24sp"
+  	        />
+  	</LinearLayout>
+    
     <LinearLayout
     	android:layout_width="fill_parent"
+    	android:gravity="center"
+    	android:paddingBottom="10sp"
     	android:layout_height="wrap_content" >
 	    <Button android:id="@+id/new_deck"
+	        android:paddingLeft="15sp"
+	        android:paddingRight="15sp"
 	    	android:layout_width="wrap_content"
 	    	android:layout_height="wrap_content"
 	    	android:text="@string/new_deck" />
@@ -25,17 +53,24 @@ android:orientation="vertical" >
     
   	<LinearLayout
     	android:layout_width="fill_parent"
+    	android:gravity="center"
+    	android:paddingBottom="10sp"
     	android:layout_height="wrap_content" >    
 	    <Button android:id="@+id/edit_deck"
 	    	android:layout_width="wrap_content"
+	    	android:paddingLeft="17sp"
+	    	android:paddingRight="17sp"
 	    	android:layout_height="wrap_content"
 	    	android:text="@string/edit_deck" />
 	</LinearLayout>
 	
   	<LinearLayout
     	android:layout_width="fill_parent"
+    	android:gravity="center"
     	android:layout_height="wrap_content" >    
 	    <Button android:id="@+id/view_deck"
+	        android:paddingLeft="15sp"
+	        android:paddingRight="15sp"
 	    	android:layout_width="wrap_content"
 	    	android:layout_height="wrap_content"
 	    	android:text="@string/view_deck" />  

@@ -69,7 +69,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	public void addCard(Card c) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = new ContentValues();
-		values.put(KEY_DECK_ID, c.getDeckId()); // wtf are the columns of a card?
+		values.put(KEY_DECK_ID, c.getDeckId());
 		values.put(BLOB_FRONT, c.getFront());
 		values.put(BLOB_BACK, c.getBack());
 		

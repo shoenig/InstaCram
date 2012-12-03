@@ -35,7 +35,6 @@ public class MainActivity extends FragmentActivity {
         newDeckButton = (Button) findViewById(R.id.new_deck);
         newDeckButton.setOnClickListener(new View.OnClickListener() {
         	public void onClick(View v) {
-        		//Toast.makeText(MainActivity.this, "New Deck Button Clicked", Toast.LENGTH_SHORT).show();
         		AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
 
         		alert.setTitle("New Deck");

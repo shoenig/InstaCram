@@ -1,7 +1,7 @@
 <resources>
 
     <string name="app_name">InstaCram</string>
-    <string name="hello_world">It is InstaCram!</string>
+    <string name="hello_world">InstaCram</string>
     <string name="menu_settings">Settings</string>
     <string name="title_activity_main">InstaCram</string>
     <string name="new_deck">New Deck</string>
@@ -18,5 +18,5 @@
     <string name="delete_deck">Delete Deck</string>
     <string name="title_activity_view_deck">ViewDeckActivity</string>
     <string name="title_activity_deck_gallery">DeckGalleryActivity</string>
-
+	<string name="space"> </string>
 </resources>
