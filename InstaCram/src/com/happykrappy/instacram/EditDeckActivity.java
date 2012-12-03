@@ -170,11 +170,13 @@ public class EditDeckActivity extends Activity {
     private void setFrontPhoto(Intent i) {
     	Bundle extras = i.getExtras();
     	mFrontThumbnail = (Bitmap) extras.get("data");
+    	mFrontThumbnail = ImgEdit.convertToBW(mFrontThumbnail);
     	mFrontThumbnailImageButton.setImageBitmap(mFrontThumbnail);
     }    
     private void setBackPhoto(Intent i) {
     	Bundle extras = i.getExtras();
     	mBackThumbnail = (Bitmap) extras.get("data");
+    	mBackThumbnail = ImgEdit.convertToBW(mBackThumbnail);
     	mBackThumbnailImageButton.setImageBitmap(mBackThumbnail);
     }
 }
