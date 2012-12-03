@@ -44,4 +44,21 @@ public class ImgEdit {
 		
 		return bw;
 	}
+	
+	
+	public static Bitmap cropify(Bitmap bw_bitmap) {
+		//TODO:
+		
+		// detect first black pixel from left -> a
+		// detect first black pixel from right -> b
+		// detect first black pixel from top -> c
+		// detect first black pixel from bottom -> d
+		// use 3rd grade geometry to find the origin (top left corner)
+		// create a rectangle from origin of dims (b-a)x(d-c)
+		// turn into bitmap
+		// return bitmap
+		// drink margarita
+		
+		return null;
+	}
 }
