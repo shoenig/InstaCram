@@ -23,4 +23,6 @@
 	<string name="input_new_deck_name">Input New Deck Name</string>
 	<string name="ok">OK</string>
 	<string name="adding_new_deck">Adding New Deck</string>
+	<string name="error_please_input_both_sides_of_card">Error: Input both sides</string>
+	
 </resources>

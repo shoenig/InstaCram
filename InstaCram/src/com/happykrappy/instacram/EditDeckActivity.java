@@ -6,7 +6,9 @@ import java.util.List;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -15,8 +17,10 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.text.Editable;
 import android.util.Log;
 
 public class EditDeckActivity extends Activity {
@@ -105,22 +109,27 @@ public class EditDeckActivity extends Activity {
         		Log.i(TAG, "Save Card Button Clicked, gonna store it and move to next card");
         		
         		//Create Card
-        		Card card = new Card(deckId);
-        		ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        		mFrontThumbnail.compress(Bitmap.CompressFormat.PNG, 100, stream);
-        		byte[] byteArrayFront = stream.toByteArray();
-        		card.setFront(byteArrayFront);
-        		stream = new ByteArrayOutputStream();
-        		mBackThumbnail.compress(Bitmap.CompressFormat.PNG, 100, stream);
-        		byte[] byteArrayBack = stream.toByteArray();
-        		card.setBack(byteArrayBack);
-        		
-        		//Add card to db
-        		final DatabaseHandler db = new DatabaseHandler(context);
-        		db.addCard(card);
-        		
-        		mFrontThumbnailImageButton.setImageResource(R.drawable.shoot_front);
-        		mBackThumbnailImageButton.setImageResource(R.drawable.shoot_back);
+        		if (mFrontThumbnail == null || mBackThumbnail == null) {
+        			showAddDeckAlert();
+        		}
+        		else {
+            		Card card = new Card(deckId);
+            		ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            		mFrontThumbnail.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            		byte[] byteArrayFront = stream.toByteArray();
+            		card.setFront(byteArrayFront);
+            		stream = new ByteArrayOutputStream();
+            		mBackThumbnail.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            		byte[] byteArrayBack = stream.toByteArray();
+            		card.setBack(byteArrayBack);
+            		
+            		//Add card to db
+            		final DatabaseHandler db = new DatabaseHandler(context);
+            		db.addCard(card);
+            		
+            		mFrontThumbnailImageButton.setImageResource(R.drawable.shoot_front);
+            		mBackThumbnailImageButton.setImageResource(R.drawable.shoot_back);	
+        		}
         	}
         });
         
@@ -181,5 +190,18 @@ public class EditDeckActivity extends Activity {
     	mBackThumbnail = (Bitmap) extras.get("data");
     	mBackThumbnail = ImgEdit.convertToBW(mBackThumbnail);
     	mBackThumbnailImageButton.setImageBitmap(mBackThumbnail);
+    }
+    
+    void showAddDeckAlert() {
+    	AlertDialog.Builder alert = new AlertDialog.Builder(this);
+    	alert.setTitle(R.string.error_please_input_both_sides_of_card);
+
+		alert.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+    		public void onClick(DialogInterface dialog, int whichButton) {
+ 
+    		}
+		});
+
+		alert.show();
     }
 }
