@@ -2,31 +2,58 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:background="@color/DarkViolet"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+	android:screenOrientation="portrait">
 
+    <!--  currently editing deck: label -->
    	<LinearLayout
    	   	android:layout_width="fill_parent"
+   	   	android:gravity="center"
+   	   	android:paddingTop="24sp"
     	android:layout_height="wrap_content" >
+    	
 	    <TextView 
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
+	        android:textColor="@color/WhiteSmoke"
+	        android:textSize="16sp"
 	        android:text="@string/currently_editing" />
+	    
 	    <TextView
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:id="@+id/deck_name"
+	        android:textColor="@color/WhiteSmoke"
+	        android:textSize="16sp"
 	        android:text=""
 	        tools:context=".EditDeckActivity" />
     </LinearLayout>
     
    <LinearLayout
     	android:layout_width="fill_parent"
+    	android:gravity="center"
+    	android:paddingTop="32sp"
     	android:layout_height="wrap_content" >    
+    	
 	    <Button android:id="@+id/save_card"
 	    	android:layout_width="wrap_content"
 	    	android:layout_height="wrap_content"
 	    	android:text="@string/save_card" />
+	    
+	    <!--  spacing in between SaveCard and Finish buttons -->
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:paddingLeft="10sp"
+	        android:paddingRight="10sp"
+	        android:text="@string/space"
+	        />
+	    
 	    <Button android:id="@+id/finished"
+	        android:paddingLeft="24sp"
+	        android:paddingRight="24sp"
 	        android:layout_width="wrap_content"
 	    	android:layout_height="wrap_content"
 	    	android:text="@string/finish" />  
@@ -34,28 +61,58 @@
     
    <LinearLayout
   	    android:layout_width="fill_parent"
+  	    android:gravity="center"
+  	    android:paddingTop="24sp"
   	    android:layout_height="wrap_content" >
+	    
   	    <ImageButton
   	        android:layout_width="wrap_content"
   	        android:layout_height="wrap_content"
   	        android:contentDescription="@string/thumb_front_desc"
-  	        android:src="@drawable/shoot_front" 
+  	        android:src="@drawable/shoot_front"
+  	        android:background="@drawable/shoot_front"
+  	        android:scaleType="fitXY"
   	        android:id="@+id/thumbnail_front" />
+  	    
+  	    <!--  spacing in between FRONT and BACK img buttons -->
+  	    <TextView
+  	        android:layout_width="wrap_content"
+  	        android:layout_height="wrap_content"
+  	        android:paddingLeft="20sp"
+  	        android:paddingRight="20sp"
+  	        android:text="@string/space"
+  	        />
+  	    
 		<ImageButton
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
 		    android:contentDescription="@string/thumb_back_desc"
 		    android:src="@drawable/shoot_back"
+		    android:background="@drawable/shoot_back"
 		    android:id="@+id/thumbnail_back" />
 	</LinearLayout>
 	
+   	<LinearLayout
+   	   	android:layout_width="fill_parent"
+   	   	android:gravity="center"
+   	   	android:paddingTop="102sp"
+    	android:layout_height="wrap_content" >
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textColor="@color/WhiteSmoke"
+	        android:text="@string/delete_deck" />
+    </LinearLayout>
+	
    <LinearLayout
   	    android:layout_width="fill_parent"
+  	    android:gravity="center"
   	    android:layout_height="wrap_content" >
   	    <ImageButton
   	        android:layout_width="wrap_content"
   	        android:layout_height="wrap_content"
   	        android:contentDescription="@string/delete_deck"
+  	        android:scaleType="center"
   	        android:src="@drawable/delete" 
   	        android:id="@+id/delete_deck" />
 	</LinearLayout>   

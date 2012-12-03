@@ -4,7 +4,8 @@
     android:layout_height="fill_parent"
     android:gravity="center"
     android:background="@color/DarkViolet"
-    android:orientation="vertical" >
+    android:screenOrientation="portrait"
+    android:orientation="vertical">
 
   	<LinearLayout
     	android:layout_width="fill_parent"

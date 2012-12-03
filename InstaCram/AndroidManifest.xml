@@ -16,6 +16,7 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".MainActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_main" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,14 +26,17 @@
         </activity>
         <activity
             android:name=".EditDeckActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_edit_deck" >
         </activity>
         <activity
             android:name=".ViewDeckActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_view_deck" >
         </activity>
         <activity
             android:name=".DeckGalleryActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_deck_gallery" >
         </activity>
     </application>
