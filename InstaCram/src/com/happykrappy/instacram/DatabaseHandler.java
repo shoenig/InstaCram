@@ -195,4 +195,20 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	    
 	    return cardList;
 	}
+
+	public String getDeckName(int deckId) {
+		SQLiteDatabase db = this.getWritableDatabase();
+		
+		Cursor cursor = db.query(TABLE_DECKS, new String[] { KEY_ID,
+                KEY_NAME }, KEY_ID + "=?",
+                new String[] { String.valueOf(deckId) }, null, null, null, null);
+		
+        if (cursor != null)
+            cursor.moveToFirst();
+                
+        db.close();
+        
+		return cursor.getString(1);
+	}
+	
 }

@@ -68,7 +68,10 @@ public class EditDeckActivity extends Activity {
         }
         
         Log.d(MainActivity.TAG, "viewDeck-DeckId: " + deckId);
-        mNameTextVew.setText("" + deckId); // the key, how to get the name?
+        //Fetch name of deck
+        final DatabaseHandler db = new DatabaseHandler(context);
+        String deckName = db.getDeckName(deckId);
+        mNameTextVew.setText(deckName); // the key, how to get the name?
         
         mDeleteDeckButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
