@@ -48,7 +48,8 @@ public class MainActivity extends FragmentActivity {
                 	showAddDeckAlert(new AlertDialog.Builder(MainActivity.this), db, true);
                 }
                 else {
-                	DialogFragment newFragment = new DeckSelector(true);
+                	DeckSelector newFragment = new DeckSelector();
+                	newFragment.setEditModeRequested(true);
                 	newFragment.show(getSupportFragmentManager(), "Deck Selector Opened In Edit Mode");
                 }
         	}
@@ -62,7 +63,8 @@ public class MainActivity extends FragmentActivity {
                 	showAddDeckAlert(new AlertDialog.Builder(MainActivity.this), db, true);
                 }
                 else {
-            		DialogFragment newFragment = new DeckSelector(false);
+            		DeckSelector newFragment = new DeckSelector();
+            		newFragment.setEditModeRequested(false);
             	    newFragment.show(getSupportFragmentManager(), "Deck Selector Opened in View Mode");
                 }
         	}

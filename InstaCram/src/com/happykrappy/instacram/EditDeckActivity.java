@@ -17,11 +17,24 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.text.Editable;
 import android.util.Log;
+
+
+/**
+ * 
+ *     A RATHER CRITICAL BUG IN ANDROID
+ *     
+ *     http://code.google.com/p/android/issues/detail?id=1480
+ *     http://stackoverflow.com/questions/1910608/android-action-image-capture-intent
+ *     
+ *     Much of the core functionality of this app depends on being able to use the camera
+ *	   to capture images and store them, and we ran into this issue on our own phones.
+ *	   Rather than fighting through it, we pretty much threw in the towel, and are still
+ *     using thumbnail images... which really aren't high resolution enough to do anything
+ *     useful with.
+ */
 
 public class EditDeckActivity extends Activity {
 	
@@ -91,7 +104,6 @@ public class EditDeckActivity extends Activity {
 			public void onClick(View v) {
 				Log.i(TAG, "Front Thumbnail Button Clicked, gonna take a picture");
 				dispatchTakePictureIntent(RETURN_FROM_FRONT_PHOTO);
-				
 				Log.i(TAG, "returned from taking photo for front");
 			}
         });
